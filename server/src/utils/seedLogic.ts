@@ -79,14 +79,8 @@ export const seedDB = async () => {
             for (const tf of timeframes) {
                 console.log(`Generating candles for ${symbol} (${tf})...`);
 
-                // drastically increase counts for "infinite scroll" feel
+                // Keep seed count reasonable for quick startup and to prevent crashing
                 let count = 1000;
-                if (tf === '1m') count = 50000; // ~34 days of minute data
-                else if (tf === '5m') count = 25000; // ~86 days
-                else if (tf === '15m') count = 25000; // ~260 days
-                else if (tf === '1h') count = 50000; // ~5.7 years
-                else if (tf === '4h') count = 25000; // ~11 years
-                else if (tf === '1D') count = 73000; // ~200 years (requested by user)
 
                 const candles = generateCandles(symbol, tf, count);
 
